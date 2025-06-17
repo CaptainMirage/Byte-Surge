@@ -16,6 +16,7 @@ struct TypingSimulator {
     rng: ThreadRng,
     current_personality: Personality,
     personality_counter: u32,
+    speed_multiplier: f64, // 1.0 = normal, 0.5 = half speed, 2.0 = double speed
     function_names: Vec<&'static str>,
     variable_names: Vec<&'static str>,
     struct_names: Vec<&'static str>,
@@ -28,6 +29,7 @@ impl TypingSimulator {
             rng: rng(),
             current_personality: Personality::Careful,
             personality_counter: 0,
+            speed_multiplier: 6.0, // Change this to adjust overall speed
             function_names: vec![
                 "process_data", "handle_request", "validate_input", "parse_config",
                 "connect_database", "serialize_response", "authenticate_user",
@@ -72,19 +74,21 @@ impl TypingSimulator {
     }
 
     fn get_typing_delay(&mut self) -> Duration {
-        match self.current_personality {
+        let base_delay = match self.current_personality {
             Personality::Rusher => Duration::from_millis(self.rng.random_range(20..80)),
             Personality::Careful => Duration::from_millis(self.rng.random_range(80..150)),
             Personality::Refactorer => Duration::from_millis(self.rng.random_range(60..120)),
-        }
+        };
+        Duration::from_millis((base_delay.as_millis() as f64 / self.speed_multiplier) as u64)
     }
 
     fn get_thinking_pause(&mut self) -> Duration {
-        match self.current_personality {
+        let base_pause = match self.current_personality {
             Personality::Rusher => Duration::from_millis(self.rng.random_range(200..800)),
             Personality::Careful => Duration::from_millis(self.rng.random_range(800..2000)),
             Personality::Refactorer => Duration::from_millis(self.rng.random_range(500..1500)),
-        }
+        };
+        Duration::from_millis((base_pause.as_millis() as f64 / self.speed_multiplier) as u64)
     }
 
     fn should_make_typo(&mut self) -> bool {
@@ -139,7 +143,8 @@ impl TypingSimulator {
                 thread::sleep(self.get_typing_delay());
                 
                 // Pause before realizing mistake
-                thread::sleep(Duration::from_millis(self.rng.random_range(100..500)));
+                let mistake_pause = Duration::from_millis(self.rng.random_range(100..500));
+                thread::sleep(Duration::from_millis((mistake_pause.as_millis() as f64 / self.speed_multiplier) as u64));
                 
                 // Backspace and correct
                 self.backspace();
@@ -169,7 +174,8 @@ impl TypingSimulator {
         }
         
         // Pause to "think" about rewrite
-        thread::sleep(Duration::from_millis(self.rng.random_range(800..2000)));
+        let rewrite_pause = Duration::from_millis(self.rng.random_range(800..2000));
+        thread::sleep(Duration::from_millis((rewrite_pause.as_millis() as f64 / self.speed_multiplier) as u64));
         
         // Retype with slight variations
         let remaining = &original[original.len().saturating_sub(delete_count)..];
@@ -200,7 +206,7 @@ impl TypingSimulator {
     }
 
     fn run(&mut self) {
-        eprintln!("DEBUG: Starting Byte Cipher - Press Ctrl+C to stop");
+        eprintln!("DEBUG: Starting Byte Surge - Press Ctrl+C to stop");
         
         loop {
             self.maybe_switch_personality();
@@ -234,7 +240,8 @@ impl TypingSimulator {
             
             // Add some breathing room between code blocks
             self.type_text_with_errors("\n\n");
-            thread::sleep(Duration::from_millis(self.rng.random_range(500..1500)));
+            let block_pause = Duration::from_millis(self.rng.random_range(500..1500));
+            thread::sleep(Duration::from_millis((block_pause.as_millis() as f64 / self.speed_multiplier) as u64));
         }
     }
 }
