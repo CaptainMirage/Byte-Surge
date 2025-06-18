@@ -31,15 +31,20 @@ impl TypingSimulator {
             personality_counter: 0,
             speed_multiplier: 6.0, // Change this to adjust overall speed
             function_names: vec![
-                "process_data", "handle_request", "validate_input", "parse_config",
-                "connect_database", "serialize_response", "authenticate_user",
-                "calculate_hash", "compress_file", "decrypt_message", "build_query",
-                "format_output", "check_permissions", "load_settings", "save_cache"
+                "initialize_logger", "cleanup_resources", "transform_data", "merge_configs",
+                "split_string", "join_paths", "read_file", "write_output", "create_directory",
+                "remove_temp_files", "backup_data", "restore_from_backup", "generate_uuid",
+                "encode_base64", "decode_json", "filter_results", "sort_collection",
+                "map_values", "reduce_dataset", "aggregate_stats", "benchmark_performance",
+                "profile_memory", "trace_execution", "log_error", "send_notification",
+                "schedule_task", "cancel_operation", "retry_request", "timeout_handler"
             ],
             variable_names: vec![
-                "result", "data", "config", "user", "response", "query", "buffer",
-                "content", "payload", "status", "error", "value", "key", "item",
-                "count", "index", "path", "url", "token", "session"
+                "cursor", "offset", "limit", "timeout", "duration", "timestamp", "metadata",
+                "headers", "params", "args", "options", "settings", "preferences", "context",
+                "scope", "namespace", "identifier", "reference", "pointer", "handle",
+                "stream", "reader", "writer", "builder", "factory", "registry", "pool",
+                "queue_item", "batch", "chunk", "fragment", "segment"
             ],
             struct_names: vec![
                 "Config", "User", "Request", "Response", "Database", "Cache",
