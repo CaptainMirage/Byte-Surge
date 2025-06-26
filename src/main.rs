@@ -43,6 +43,7 @@ impl TypingSimulator {
                 "profile_memory", "trace_execution", "log_error", "send_notification",
                 "schedule_task", "cancel_operation", "retry_request", "timeout_handler"
             ],
+            
             variable_names: vec![
                 "result", "data", "config", "user", "response", "query", "buffer",
                 "content", "payload", "status", "error", "value", "key", "item",
