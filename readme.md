@@ -1,6 +1,6 @@
 # Byte Surge
 
-A fun Rust program that simulates a human typing out random Rust code, complete with typos, pauses, and personality quirks.
+A fun Rust program that simulates a human typing out random Rust code, complete with typos, pauses, and personality quirks. (Rusher, Careful, Refactorer)
 
 ## Usage
 
