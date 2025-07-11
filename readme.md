@@ -8,4 +8,4 @@ A fun Rust program that simulates a human typing out random Rust code, complete 
 cargo run
 ```
 
-Press `Ctrl+C` to stop the simulation.
+Press `Ctrl+C` to stop the simulation.
